@@ -1,10 +1,16 @@
 # dsh-sticker-library
 
-给 [DeepSeek Harness](https://github.com/deepseek-ai) 的**聊天表情包库**：收图去重、视觉模型自己打标、按含义挑图，附两条安全线。
+[English](README.en.md) | 简体中文
+
+给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（dsh）的**聊天表情包库**：收图去重、视觉模型自己打标、按含义挑图，附两条安全线。
 
 它不是「把图片存进一个文件夹」——那种事 `mkdir` 就够了。它管的是**让一个 Agent 真的会用表情包**这件事里最容易做错的四步。
 
-## 为什么要单独做一个
+---
+
+## 为什么需要它
+
+**为什么要单独做一个。**
 
 **1. 什么算表情包。**
 拿 `summary === '[图片]'` 之类的启发式去认，会把群友发的**真人照片、截图、表情包混成一锅**收进库。只认协议明确标出来的贴图（OneBot 的 `emoji_id` / `sub_type=1` 那类），其余一律不进。
@@ -18,7 +24,7 @@
 **4. 两条安全线。**
 `脏`（脏话 / 性暗示 / 下流）和 `烂`（低质烂梗素材）。这两类在**入库那一刻**就拦掉，不指望下游的模型每次都记得别发——它会忘，而且它不懂那是什么意思。
 
-## 装
+## 安装
 
 ```bash
 npm i dsh-sticker-library
@@ -27,7 +33,7 @@ npm i dsh-sticker-library
 
 `cordis.patch.yml` 里那份示例配置可以直接抄。
 
-## 配（打标那一路）
+## 配置（打标那一路）
 
 打标需要一个「看得见」的模型，两种接法，选一个：
 
@@ -52,7 +58,7 @@ config:
 
 > 提示：大图直接 base64 发过去很费 token。我们在生产里先把它压到长边 768 再发——那步用 Pillow 一行就能做，这里没有替你做，因为不想为了省几厘钱给你绑一个 Python 依赖。
 
-## 给 Agent 的工具
+## 用法（给 Agent 的工具）
 
 | 工具 | 干什么 |
 | --- | --- |
@@ -64,7 +70,7 @@ config:
 
 `sticker_pick` 挑不到时会**明说挑不到**，不会硬塞一张不相干的——这个细节比看起来重要：一个「随便给你一张」的挑图器，用两次就没人敢让它发图了。
 
-## 给别的插件用的服务
+## 用法（给别的插件用的服务）
 
 ```js
 const shelf = ctx.stickerShelf
@@ -90,7 +96,7 @@ console.log(shelf.catalog(20))
 console.log(shelf.resolve('无语'))
 ```
 
-## 自检
+## 测试
 
 ```bash
 node test/selftest.mjs
@@ -98,7 +104,7 @@ node test/selftest.mjs
 
 不联网、不调模型、不依赖任何私人目录：视觉模型和下载都是假的，测的是**解析和安全线**（去重、黑名单、大小闸、烂梗拦截、成人图三条路全堵死、协议无关入库口……）。84 项。
 
-## 边界（不做什么）
+## 已知局限（不做什么）
 
 - 不做发送。挑出来给你路径，怎么发是你的事——发出去的那一刻要过谁的审核，也该由你决定。
 - 不替你决定「什么算脏」。提示词里的那两条线是可以改的（`prompt` 配置），改完记得 `TAG_VER` 一起升，否则老图不会重标。
@@ -107,3 +113,7 @@ node test/selftest.mjs
 ## License
 
 MIT
+
+## English
+
+→ Full English README: [README.en.md](README.en.md)
