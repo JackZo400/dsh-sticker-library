@@ -1,0 +1,48 @@
+{
+  "name": "dsh-sticker-library",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "给 dsh 的聊天表情包库：收图去重、视觉打标、按含义挑图；删了真删（哈希黑名单），脏话与烂梗在入库那一刻拦掉。",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "sticker",
+    "emoji",
+    "meme",
+    "chatbot",
+    "qq",
+    "onebot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackZo400/dsh-sticker-library.git"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./shelf": "./src/shelf.js",
+    "./package.json": "./package.json"
+  },
+  "icon": "./icon.svg",
+  "meta": {
+    "title": "Sticker Library",
+    "description": "聊天表情包库：去重入库、视觉打标、按含义挑图，带两条安全线"
+  },
+  "files": [
+    "index.js",
+    "src",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node test/selftest.mjs && node test/plugin-selftest.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

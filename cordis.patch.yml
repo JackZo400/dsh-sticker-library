@@ -1,0 +1,34 @@
+# dsh-sticker-library 的示例配置（bundle patch）。
+#
+# 装完至少要确认两件事：
+#   1. `dir` 指到一个你真想放图的地方（默认是启动目录下的 .stickers/）
+#   2. 打标那条路通了：要么配 vision（任何 OpenAI 兼容的 /chat/completions），
+#      要么配 describeCommand 挂一条本地命令。两个都没有也能用 —— 库照收、清单照出，只是挑图准头差。
+- insert:
+    - id: sticker-library
+      name: dsh-sticker-library
+      config:
+        # 图片存哪（会自动建）。想固定位置就写绝对路径。
+        dir: .stickers
+
+        # —— 打标：走 HTTP（OpenAI 兼容，要支持 image_url 的 data: base64）——
+        vision:
+          baseUrl: https://api.openai.com/v1
+          # 建议用环境变量，别把 key 写进配置文件：STICKER_VISION_KEY
+          apiKey: ''
+          # 换成你看得见图的模型（DeepSeek 官方视觉模型、gpt-4o-mini、qwen-vl 都行）
+          model: gpt-4o-mini
+
+        # —— 打标：或者挂一条本地命令（设了它就不走上面那套）——
+        # describeCommand: 'node /path/to/describe.js'
+
+        # 一次最多打几张标（每张一次模型调用，按钱算）
+        tagLimit: 15
+
+        # 库上限 / 单张大小闸（默认 4MB：聊天软件里的贴图基本都在这以下）
+        maxItems: 500
+        maxBytes: 4194304
+        minBytes: 1024
+
+        # sticker_catalog 一次最多列几张
+        catalogLimit: 40
