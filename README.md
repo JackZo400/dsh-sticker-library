@@ -6,6 +6,11 @@
 
 它不是「把图片存进一个文件夹」——那种事 `mkdir` 就够了。它管的是**让一个 Agent 真的会用表情包**这件事里最容易做错的四步。
 
+> **同类里更成熟的选择**：[yyh-001/dsh-meme](https://github.com/yyh-001/dsh-meme) 和 [william-jin-cmu/dsh-stickers](https://github.com/william-jin-cmu/dsh-stickers) 都比这份成型得早，要装可以先看它们。
+> 我们这份留着的理由：**去重入库 + 视觉打标 + 两条安全线**——脏和烂在入库那一刻就拦掉，
+> 不指望下游的模型每次都记得。
+> 它是我们自己群里在用的那一套，顺手放出来。
+
 ---
 
 ## 为什么需要它

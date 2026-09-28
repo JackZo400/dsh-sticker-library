@@ -11,6 +11,14 @@ It is not "put the images into a folder" - `mkdir` is enough for that. What it h
 is the four steps of **making an Agent actually use stickers** that are easiest to get
 wrong.
 
+> **More mature options in the same space**: [yyh-001/dsh-meme](https://github.com/yyh-001/dsh-meme) and
+> [william-jin-cmu/dsh-stickers](https://github.com/william-jin-cmu/dsh-stickers) are both older and more
+> established than this one; look at them first if you are choosing.
+> Why we keep this one: **dedupe on save + vision tagging + two safety lines** - profanity and low-quality
+> meme material are blocked at the moment they are saved, instead of counting on the downstream model to
+> remember every time.
+> It is the set our own group chat runs, published as it is.
+
 ## Why you need it
 
 **Why build this as a separate thing.**
